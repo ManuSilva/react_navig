@@ -36,7 +36,7 @@ export default function App() {
 						},
 					}}>
 						<Stack.Screen name={routes.Home} component={Tela_Home} />
-						<Stack.Screen name={routes.Lista} component={Tela_Scrow} />
+						<Stack.Screen name={routes.Lista} component={Tela_Scrow} options={{ title: 'Pokedex' }} />
 					</Stack.Navigator>
 				</NavigationContainer>
 			</QueryClientProvider>

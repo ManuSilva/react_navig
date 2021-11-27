@@ -1,6 +1,6 @@
 const routes = {
-  Home: "Home",
-  Lista: "Pokemon",
+  Home: "Pokedex",
+  Lista: "Lista",
 };
 
 export default routes;

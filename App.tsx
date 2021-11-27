@@ -1,21 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { QueryClient, QueryClientProvider} from "react-query";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { routes } from "./Navigation";
+
+import { StoreProvider } from "easy-peasy";
+
+import { store } from "./easy-peasy/store";
+import { Tela_Home } from "./Telas/Home";
+import { Tela_Scrow } from "./Telas/Lista";
+
+// Create client
+const queryClient = new QueryClient();
+
+// Create Stack
+const Stack = createNativeStackNavigator();
+
+
+// --------------------------------------------------------------------//
+//                            Executar APP
+// --------------------------------------------------------------------//
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	return (
+		<StoreProvider store={store}>
+			<QueryClientProvider client={queryClient}>
+				<NavigationContainer>
+					<Stack.Navigator initialRouteName={routes.Home} screenOptions={{
+						headerStyle: {
+							backgroundColor: '#ff4d4d',
+						},
+						headerTintColor: '#fff',
+						headerTitleStyle: {
+							fontWeight: 'bold',
+						},
+					}}>
+						<Stack.Screen name={routes.Home} component={Tela_Home} />
+						<Stack.Screen name={routes.Lista} component={Tela_Scrow} />
+					</Stack.Navigator>
+				</NavigationContainer>
+			</QueryClientProvider>
+		</StoreProvider>
+	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
